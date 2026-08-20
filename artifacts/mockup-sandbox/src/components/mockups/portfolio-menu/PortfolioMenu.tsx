@@ -1,103 +1,153 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import gsap from "gsap";
+import { SplitText } from "gsap/SplitText";
 
 import "./styles.css";
 
-type MenuItem = {
-  index: string;
-  label: string;
-  detail: string;
-  sans?: boolean;
-};
-
-const menuItems: MenuItem[] = [
-  { index: "01", label: "Selected work", detail: "Case studies" },
-  { index: "02", label: "About", detail: "The person behind it", sans: true },
-  { index: "03", label: "Archive", detail: "A wider body of work", sans: true },
-  { index: "04", label: "Field notes", detail: "Images and observations" },
-  { index: "05", label: "Capabilities", detail: "What I bring to a brief" },
-  { index: "06", label: "Start a project", detail: "Let’s make something", sans: true },
-];
+gsap.registerPlugin(SplitText);
 
 export function PortfolioMenu() {
-  const [isOpen, setIsOpen] = useState(false);
-
   useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsOpen(false);
+    const menu = document.querySelector(".menu");
+    const menuBg = document.querySelector(".menu-bg");
+    const menuItems = document.querySelectorAll(".menu-item");
+    const navToggler = document.querySelector(".nav-toggler");
+
+    if (!menu || !menuBg || !navToggler) return;
+
+    const items = [...menuItems].map((item) => {
+      const index = item.querySelector(".item-index");
+      const label = item.querySelector(".item-label");
+      const divider = item.querySelector(".item-divider");
+
+      if (!index || !label || !divider) {
+        throw new Error("Portfolio menu item is missing required markup.");
       }
+
+      const chars = new SplitText(label, { type: "chars", mask: "chars" }).chars;
+      const [firstChar, ...trailingChars] = chars;
+
+      const trailingCharBox = document.createElement("span");
+      trailingCharBox.className = "item-body";
+      trailingChars.forEach((char) => trailingCharBox.appendChild(char.parentElement!));
+      label.after(trailingCharBox);
+
+      const indexWord = new SplitText(index, { type: "words", mask: "words" }).words;
+
+      gsap.set([indexWord, firstChar], { yPercent: 100 });
+      gsap.set(trailingChars, { xPercent: 125 });
+      gsap.set(trailingCharBox, { width: 0 });
+
+      return { indexWord, firstChar, trailingChars, trailingCharBox, divider };
+    });
+
+    function flickerTextTo(element: Element, text: string) {
+      const target = element as HTMLElement & { flickerSplit?: SplitText };
+      target.flickerSplit?.revert();
+      target.textContent = text;
+      target.flickerSplit = new SplitText(target, { type: "chars" });
+      gsap.fromTo(
+        target.flickerSplit.chars,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 0.05,
+          ease: "power2.inOut",
+          overwrite: true,
+          stagger: { amount: 0.3, from: "random" },
+        },
+      );
+    }
+
+    const timeline = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+    let isMenuOpen = false;
+
+    const toggleMenu = () => {
+      isMenuOpen = !isMenuOpen;
+      menu.classList.toggle("is-menu-open", isMenuOpen);
+      isMenuOpen ? timeline.play() : timeline.reverse();
+      flickerTextTo(navToggler, isMenuOpen ? "Close" : "Menu");
     };
 
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    navToggler.addEventListener("click", toggleMenu);
+
+    timeline.to(menuBg, { opacity: 1, duration: 0.75 }, 0);
+
+    items.forEach(({ indexWord, firstChar, trailingChars, trailingCharBox, divider }, i) => {
+      const startTime = 0.5 + i * 0.15;
+
+      timeline
+        .to([indexWord, firstChar], { yPercent: 0, duration: 0.75 }, startTime)
+        .to(divider, { scaleY: 1, duration: 1, ease: "power3.out" }, startTime + 0.05)
+        .to(
+          trailingCharBox,
+          {
+            width: trailingCharBox.scrollWidth,
+            duration: 1,
+            ease: "power4.inOut",
+          },
+          startTime + 0.25,
+        )
+        .to(trailingChars, { xPercent: 0, duration: 0.75, stagger: 0.05 }, startTime + 0.5);
+    });
+
+    return () => {
+      navToggler.removeEventListener("click", toggleMenu);
+      timeline.kill();
+      menuItems.forEach((item) => {
+        item.querySelector(".item-label")?.querySelectorAll(".char").forEach((char) => {
+          char.replaceWith(char.textContent ?? "");
+        });
+        item.querySelector(".item-body")?.remove();
+      });
+    };
   }, []);
 
-  const toggleMenu = () => setIsOpen((open) => !open);
-
   return (
-    <main className="portfolio-menu">
-      <div className="pm-vignette" aria-hidden="true" />
-      <div className="pm-grain" aria-hidden="true" />
-
-      <nav className="pm-nav" aria-label="Primary">
-        <button
-          className="pm-logo"
-          type="button"
-          aria-label="Return to the portfolio home"
-          onClick={() => setIsOpen(false)}
-        >
-          Obscura
-          <span>Independent studio</span>
-        </button>
-
-        <button
-          className="pm-toggle"
-          type="button"
-          aria-expanded={isOpen}
-          aria-controls="portfolio-navigation"
-          data-open={isOpen}
-          onClick={toggleMenu}
-        >
-          <span>{isOpen ? "Close" : "Menu"}</span>
-          <span className="pm-toggle-mark" aria-hidden="true" />
-        </button>
+    <>
+      <nav>
+        <div className="nav-logo">
+          <a href="/">Obscura</a>
+        </div>
+        <button className="nav-toggler" type="button">Menu</button>
       </nav>
 
-      <section className="pm-hero-copy" aria-label="Portfolio introduction">
-        <p>Designing identities, interfaces<br />and useful little worlds.</p>
-        <p>New York · London<br />Available for select work / 2024—25</p>
-      </section>
+      <nav className="menu" aria-label="Primary navigation">
+        <div className="menu-bg" />
+        <a className="menu-item" href="/work">
+          <span className="item-index">01</span>
+          <span className="item-label">Work</span>
+          <span className="item-divider" />
+        </a>
+        <a className="menu-item sans" href="/portfolio">
+          <span className="item-index">02</span>
+          <span className="item-label">Portfolio</span>
+          <span className="item-divider" />
+        </a>
+        <a className="menu-item sans" href="/retrospective">
+          <span className="item-index">03</span>
+          <span className="item-label">Retrospective</span>
+          <span className="item-divider" />
+        </a>
+        <a className="menu-item" href="/lens">
+          <span className="item-index">04</span>
+          <span className="item-label">Lens</span>
+          <span className="item-divider" />
+        </a>
+        <a className="menu-item" href="/selected">
+          <span className="item-index">05</span>
+          <span className="item-label">Selected</span>
+          <span className="item-divider" />
+        </a>
+        <a className="menu-item sans" href="/enquire">
+          <span className="item-index">06</span>
+          <span className="item-label">Enquire</span>
+          <span className="item-divider" />
+        </a>
+      </nav>
 
-      <div
-        id="portfolio-navigation"
-        className="pm-menu"
-        data-open={isOpen}
-        aria-hidden={!isOpen}
-      >
-        <button
-          className="pm-menu-bg"
-          type="button"
-          aria-label="Close navigation"
-          onClick={() => setIsOpen(false)}
-        />
-
-        {menuItems.map((item) => (
-          <button
-            className={`pm-menu-item${item.sans ? " is-sans" : ""}`}
-            key={item.index}
-            type="button"
-            onClick={() => setIsOpen(false)}
-          >
-            <span className="pm-index">{item.index}</span>
-            <span className="pm-label">{item.label}</span>
-            <span className="pm-divider" aria-hidden="true" />
-            <span className="pm-trailing" aria-hidden="true">
-              <span className="pm-trailing-text">{item.detail}</span>
-            </span>
-          </button>
-        ))}
-      </div>
-    </main>
+      <section className="hero" aria-label="Portfolio hero" />
+    </>
   );
 }
 
