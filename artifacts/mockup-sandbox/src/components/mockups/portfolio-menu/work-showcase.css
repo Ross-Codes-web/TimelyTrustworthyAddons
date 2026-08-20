@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css?family=Inter:300,regular,500,600,700,800,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+.work-showcase {
+  min-width: 20rem;
+  color: #000;
+  font-family: "Inter";
+  font-size: 1rem;
+  background: #f2f2f2;
+}
+
+.work-showcase *,
+.work-showcase *::before,
+.work-showcase *::after {
+  padding: 0rem;
+  margin: 0rem;
+  border: 0rem;
+  box-sizing: border-box;
+}
+
+.work-showcase .index {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+.work-showcase .index__container {
+  max-width: 75rem;
+  margin: 0 auto;
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
+}
+
+.work-showcase .projects {
+  display: flex;
+  flex-direction: column;
+  width: 62.5rem;
+}
+
+.work-showcase .project {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem 8rem;
+  border-top: 0.0625rem solid rgba(0, 0, 0, 0.2745098039);
+  cursor: pointer;
+}
+
+.work-showcase .project h2 {
+  font-family: "Raleway", sans-serif;
+  font-size: 3.5rem;
+  font-weight: 500;
+  transition: 0.5s ease;
+}
+
+.work-showcase .project p {
+  font-family: "Raleway", sans-serif;
+  transition: 0.5s ease;
+}
+
+.work-showcase .project:last-child {
+  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.2745098039);
+}
+
+.work-showcase .project:hover {
+  opacity: 0.5;
+}
+
+.work-showcase .project:hover h2 {
+  transform: translateX(-0.9375rem);
+}
+
+.work-showcase .project:hover p {
+  transform: translateX(0.9375rem);
+}
+
+.work-showcase .project-thumbnail {
+  position: fixed;
+  width: 25rem;
+  height: 15.625rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  transform-origin: center center;
+  z-index: 50;
+}
+
+.work-showcase .thumbnail {
+  width: 100%;
+  height: 100%;
+  flex: 0 0 100%;
+}
+
+.work-showcase .thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 1000px) {
+  .work-showcase .projects {
+    width: min(62.5rem, 100%);
+  }
+
+  .work-showcase .project {
+    padding: 3rem 2rem;
+  }
+
+  .work-showcase .project h2 {
+    font-size: 2.5rem;
+  }
+
+  .work-showcase .item-divider {
+    margin: 0 1rem;
+  }
+}

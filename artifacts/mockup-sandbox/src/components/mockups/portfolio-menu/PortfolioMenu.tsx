@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 
 import "./styles.css";
+import { WorkShowcase } from "./WorkShowcase";
 
 gsap.registerPlugin(SplitText);
 
@@ -147,6 +148,22 @@ export function PortfolioMenu() {
       </nav>
 
       <section className="hero" aria-label="Portfolio hero" />
+      <WorkShowcase />
+      <section className="portfolio-placeholder" aria-label="About placeholder">
+        <span>02</span>
+        <h2>About</h2>
+        <p>Next component placeholder</p>
+      </section>
+      <section className="portfolio-placeholder" aria-label="Archive placeholder">
+        <span>03</span>
+        <h2>Archive</h2>
+        <p>Next component placeholder</p>
+      </section>
+      <section className="portfolio-placeholder" aria-label="Contact placeholder">
+        <span>04</span>
+        <h2>Start a project</h2>
+        <p>Next component placeholder</p>
+      </section>
     </>
   );
 }
