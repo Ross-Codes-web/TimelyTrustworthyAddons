@@ -1,0 +1,122 @@
+.floating-videos-footer {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  overflow: hidden;
+  background: #000;
+  font-family: "PP Neue Montreal", Arial, sans-serif;
+}
+
+.floating-videos-footer .floating-videos-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  z-index: 1;
+}
+
+.floating-videos-footer nav {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: flex;
+  padding: 2em;
+  z-index: 2;
+}
+
+.floating-videos-footer .nav-item:nth-child(1) {
+  flex: 3;
+}
+
+.floating-videos-footer .nav-item:nth-child(2) {
+  flex: 2;
+  display: flex;
+}
+
+.floating-videos-footer .nav-item:nth-child(2) p {
+  flex: 1;
+}
+
+.floating-videos-footer p {
+  font-weight: 500;
+  color: #fff;
+  opacity: 0.5;
+  letter-spacing: 0;
+}
+
+.floating-videos-footer .header {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.floating-videos-footer .header h1 {
+  text-transform: uppercase;
+  font-family: "PP Editorial Old", Georgia, serif;
+  font-size: 14vw;
+  font-weight: 300;
+  color: #fff;
+  text-align: center;
+  line-height: 100%;
+}
+
+.floating-videos-footer video,
+.floating-videos-footer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.floating-videos-footer .video-container,
+.floating-videos-footer .img-container {
+  position: absolute;
+  width: 700px;
+  height: 500px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.floating-videos-footer .cursor {
+  position: fixed;
+  width: 150px;
+  height: 150px;
+  background: #fff;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.floating-videos-footer .items-container {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+@media (max-width: 1000px) {
+  .floating-videos-footer nav {
+    padding: 1.25rem;
+  }
+
+  .floating-videos-footer .nav-item:nth-child(2) {
+    display: block;
+  }
+
+  .floating-videos-footer .nav-item:nth-child(2) p + p {
+    margin-top: 0.75rem;
+  }
+
+  .floating-videos-footer .header h1 {
+    font-size: 17vw;
+  }
+
+  .floating-videos-footer .video-container,
+  .floating-videos-footer .img-container {
+    width: min(700px, 80vw);
+    height: min(500px, 58vw);
+  }
+}

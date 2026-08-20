@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 
 import "./styles.css";
+import { FloatingVideosFooter } from "./FloatingVideosFooter";
 import { WorkShowcase } from "./WorkShowcase";
 
 gsap.registerPlugin(SplitText);
@@ -164,6 +165,7 @@ export function PortfolioMenu() {
         <h2>Start a project</h2>
         <p>Next component placeholder</p>
       </section>
+      <FloatingVideosFooter />
     </>
   );
 }
