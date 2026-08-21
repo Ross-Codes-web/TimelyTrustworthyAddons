@@ -3,8 +3,8 @@ import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 
 import "./styles.css";
-import { CodeTwoSection } from "./CodeTwoSection";
 import { FloatingVideosFooter } from "./FloatingVideosFooter";
+import { ProjectSectionReveals } from "./ProjectSectionReveals";
 import { VoyeurVeriteScroll } from "./VoyeurVeriteScroll";
 import { WorkShowcase } from "./WorkShowcase";
 
@@ -153,22 +153,7 @@ export function PortfolioMenu() {
       <section className="hero" aria-label="Portfolio hero" />
       <VoyeurVeriteScroll />
       <WorkShowcase />
-      <section className="portfolio-placeholder" aria-label="About placeholder">
-        <span>02</span>
-        <h2>About</h2>
-        <p>Next component placeholder</p>
-      </section>
-      <section className="portfolio-placeholder" aria-label="Archive placeholder">
-        <span>03</span>
-        <h2>Archive</h2>
-        <p>Next component placeholder</p>
-      </section>
-      <section className="portfolio-placeholder" aria-label="Contact placeholder">
-        <span>04</span>
-        <h2>Start a project</h2>
-        <p>Next component placeholder</p>
-      </section>
-      <CodeTwoSection />
+      <ProjectSectionReveals />
       <FloatingVideosFooter />
     </>
   );

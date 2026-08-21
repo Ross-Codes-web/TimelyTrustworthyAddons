@@ -59,33 +59,6 @@ nav {
   background-size: cover;
 }
 
-.portfolio-placeholder {
-  min-height: 100svh;
-  display: grid;
-  align-content: center;
-  gap: 1rem;
-  padding: 8rem 2rem;
-  background: #161712;
-  color: var(--text-color);
-  border-top: 1px solid rgba(224, 224, 202, 0.25);
-}
-
-.portfolio-placeholder span,
-.portfolio-placeholder p {
-  color: rgba(224, 224, 202, 0.58);
-  font-family: "JetBrains Mono";
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.portfolio-placeholder h2 {
-  font-family: "DM Serif Display";
-  font-size: clamp(4rem, 10vw, 9rem);
-  font-weight: 400;
-  letter-spacing: -0.05em;
-}
-
 .menu {
   position: fixed;
   inset: 0;

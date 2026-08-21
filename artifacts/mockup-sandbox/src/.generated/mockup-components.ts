@@ -4,6 +4,7 @@ export const modules: ModuleMap = {
   "./components/mockups/portfolio-menu/CodeTwoSection.tsx": () => import("../components/mockups/portfolio-menu/CodeTwoSection.tsx"),
   "./components/mockups/portfolio-menu/FloatingVideosFooter.tsx": () => import("../components/mockups/portfolio-menu/FloatingVideosFooter.tsx"),
   "./components/mockups/portfolio-menu/PortfolioMenu.tsx": () => import("../components/mockups/portfolio-menu/PortfolioMenu.tsx"),
+  "./components/mockups/portfolio-menu/ProjectSectionReveals.tsx": () => import("../components/mockups/portfolio-menu/ProjectSectionReveals.tsx"),
   "./components/mockups/portfolio-menu/VoyeurVeriteScroll.tsx": () => import("../components/mockups/portfolio-menu/VoyeurVeriteScroll.tsx"),
   "./components/mockups/portfolio-menu/WorkShowcase.tsx": () => import("../components/mockups/portfolio-menu/WorkShowcase.tsx")
 };
