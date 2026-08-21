@@ -1,0 +1,48 @@
+.voyeur-verite-scroll {
+  --base-100: #dcdbd5;
+  --base-200: #e12c1a;
+  --base-300: #1a0401;
+  position: relative;
+  width: 100%;
+  color: var(--base-300);
+  background: var(--base-300);
+  font-family: "PP Neue Montreal", sans-serif;
+}
+
+.voyeur-verite-scroll img { width: 100%; height: 100%; object-fit: cover; }
+.voyeur-verite-scroll h1,
+.voyeur-verite-scroll h3 { text-transform: uppercase; font-family: "PP Neue Montreal", sans-serif; font-weight: 500; line-height: 0.8; letter-spacing: -3%; }
+.voyeur-verite-scroll h1 { font-size: clamp(2rem, 8vw, 14rem); }
+.voyeur-verite-scroll h3 { font-size: clamp(2rem, 5vw, 8rem); }
+.voyeur-verite-scroll p { text-transform: uppercase; font-family: "PP Neue Montreal", sans-serif; font-size: 0.85rem; font-weight: 500; line-height: 1.1; }
+.voyeur-verite-scroll > section { position: relative; width: 100%; height: 100svh; overflow: hidden; }
+.voyeur-verite-scroll .about { background-color: var(--base-300); display: flex; justify-content: center; align-items: center; }
+.voyeur-verite-scroll .about h3 { text-align: center; color: var(--base-100); width: 60%; }
+.voyeur-verite-scroll .hero-fg-content,
+.voyeur-verite-scroll .hero-bg-content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform-origin: center center; }
+.voyeur-verite-scroll .hero-fg-content { background-color: var(--base-300); clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); will-change: clip-path, transform; z-index: 2; }
+.voyeur-verite-scroll .hero-fg-img { position: absolute; width: 100%; height: 100%; }
+.voyeur-verite-scroll .hero-fg-header { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 95%; padding: 2rem; color: var(--base-100); text-align: center; }
+.voyeur-verite-scroll .hero-fg-overlay-dark,
+.voyeur-verite-scroll .hero-fg-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; will-change: opacity; }
+.voyeur-verite-scroll .hero-fg-overlay-dark { background-color: var(--base-300); }
+.voyeur-verite-scroll .hero-fg-overlay { background-color: var(--base-200); }
+.voyeur-verite-scroll .hero-bg-content { display: flex; background-color: var(--base-100); z-index: 0; }
+.voyeur-verite-scroll .hero-bg-content-col { flex: 1; height: 100%; display: flex; align-items: center; padding: 2rem; }
+.voyeur-verite-scroll .hero-bg-content-col:nth-child(2) { justify-content: flex-end; }
+.voyeur-verite-scroll .hero-bg-content-copy { display: flex; flex-direction: column; gap: 0.5rem; width: 50%; will-change: transform; }
+.voyeur-verite-scroll .hero-bg-content-copy h3 { color: var(--base-200); }
+.voyeur-verite-scroll .hero-bg-content-copy p { color: var(--base-300); }
+.voyeur-verite-scroll .hero-outro-content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; z-index: 1; }
+.voyeur-verite-scroll .hero-outro-img { flex: 1; height: 100%; will-change: clip-path; }
+.voyeur-verite-scroll .hero-outro-img:nth-child(1) { clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%); }
+.voyeur-verite-scroll .hero-outro-img:nth-child(2) { clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%); }
+.voyeur-verite-scroll .hero-outro-header { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--base-100); text-align: center; width: 60%; }
+.voyeur-verite-scroll .hero-outro-header .line { position: relative; will-change: transform; }
+@media (max-width: 1000px) {
+  .voyeur-verite-scroll .hero-bg-content-copy { width: 100%; }
+  .voyeur-verite-scroll .hero-bg-content-col:nth-child(1) .hero-bg-content-copy { margin-top: -50svh; }
+  .voyeur-verite-scroll .hero-bg-content-col:nth-child(2) .hero-bg-content-copy { margin-top: 50svh; }
+  .voyeur-verite-scroll .about h3,
+  .voyeur-verite-scroll .hero-outro-header { width: 100%; padding: 2rem; }
+}
